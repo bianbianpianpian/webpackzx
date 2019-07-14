@@ -25,6 +25,10 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "axios": "^0.17.0",
+    "echarts": "^3.7.2",
+    "iview": "^3.2.2",
+    "portfinder": "^1.0.13",
     "vue": "^2.5.2"{{#router}},
     "vue-router": "^3.0.1"{{/router}}
   },

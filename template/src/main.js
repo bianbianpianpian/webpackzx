@@ -8,6 +8,14 @@ import App from './App'
 import router from './router'
 {{/router}}
 
+import iView from 'iview'
+import 'iview/dist/styles/iview.css'    // 使用 CSS
+Vue.use(iView)
+
+import axios from 'axios'
+Vue.prototype.$http = axios
+import '../static/scss/style.scss'
+
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

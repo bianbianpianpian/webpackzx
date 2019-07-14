@@ -43,6 +43,11 @@ module.exports = {
   {{/if_eq}}
   // add your custom rules here
   rules: {
+    'eqeqeq': 'off',
+    'no-tabs': 'off',
+    'no-mixed-spaces-and-tabs': 'off',
+    'vue/no-parsing-error': [2, { 'x-invalid-end-tag': false }],
+    'no-trailing-spaces': 'off',
     {{#if_eq lintConfig "standard"}}
     // allow async-await
     'generator-star-spacing': 'off',
@@ -70,5 +75,8 @@ module.exports = {
     {{/if_eq}}
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
+  },
+  globals: {
+    __HOST: true
   }
 }

@@ -46,6 +46,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
   },
   plugins: [
     new webpack.DefinePlugin({
+      __HOST: JSON.stringify('http://localhost:18001'),
       'process.env': require('../config/dev.env')
     }),
     new webpack.HotModuleReplacementPlugin(),
