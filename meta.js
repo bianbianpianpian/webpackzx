@@ -5,6 +5,7 @@ const {
   sortDependencies,
   installDependencies,
   runLintFix,
+  runMockServer,
   printMessage,
 } = require('./utils')
 const pkg = require('./package.json')
@@ -156,6 +157,29 @@ module.exports = {
         },
       ],
     },
+    autoMockInstall: {
+      when: 'isNotTest',
+      type: 'list',
+      message:
+        'Should we run `mock install and run` for you after the project has been created? (recommended)',
+      choices: [
+        {
+          name: 'Yes, use NPM',
+          value: 'npm',
+          short: 'npm',
+        },
+        {
+          name: 'Yes, use Yarn',
+          value: 'yarn',
+          short: 'yarn',
+        },
+        {
+          name: 'No, I will handle that myself',
+          value: false,
+          short: 'no',
+        },
+      ],
+    },
   },
   filters: {
     '.eslintrc.js': 'lint',
@@ -177,11 +201,26 @@ module.exports = {
     sortDependencies(data, green)
 
     const cwd = path.join(process.cwd(), data.inPlace ? '' : data.destDirName)
+    console.log('***********', cwd)
 
     if (data.autoInstall) {
       installDependencies(cwd, data.autoInstall, green)
         .then(() => {
           return runLintFix(cwd, data, green)
+        })
+        .then(() => {
+          printMessage(data, green)
+        })
+        .catch(e => {
+          console.log(chalk.red('Error:'), e)
+        })
+    } else {
+      printMessage(data, chalk)
+    }
+    if (data.autoMockInstall) {
+      installDependencies(cwd + '/fed-server', data.autoMockInstall, green)
+        .then(() => {
+          return runMockServer(cwd + '/fed-server', data, green)
         })
         .then(() => {
           printMessage(data, green)

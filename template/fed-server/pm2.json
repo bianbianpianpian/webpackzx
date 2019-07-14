@@ -1,5 +1,5 @@
 {
-  "name"        : "fpe-demo",  // 应用名称
+  "name"        : "{{ name }}",  // 应用名称
   "script"      : "./server/app.js",  // 实际启动脚本
   "cwd"         : "./",  // 当前工作路径
   "watch": [  // 监控变化的目录，一旦变化，自动重启

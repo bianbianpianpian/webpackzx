@@ -1,12 +1,13 @@
 {
-  "name": "fpe-demo",
+  "name": "{{ name }}",
   "version": "0.1.0",
+  "description": "{{ description }}",
+  "author": "{{ author }}",
   "license": "MIT",
   "scripts": {
     "start": "npm run server",
     "server": "pm2 restart pm2.json"
   },
-  "author": "zhangxin",
   "private": true,
   "dependencies": {
     "body-parser": "^1.18.2",

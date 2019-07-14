@@ -1,6 +1,7 @@
 const path = require('path')
 const fs = require('fs')
 const spawn = require('child_process').spawn
+const exec = require('child_process').execSync
 
 const lintStyles = ['standard', 'airbnb']
 
@@ -59,6 +60,24 @@ exports.runLintFix = function runLintFix(cwd, data, color) {
     })
   }
   return Promise.resolve()
+}
+
+/**
+ * Runs `npm run server` in the project directory
+ * @param {string} cwd Path of the created project directory
+ * @param {object} data Data from questionnaire
+ */
+exports.runMockServer = function runMockServer(cwd, data, color) {
+  console.log(
+    `\n\n${color(
+      'Running mock server...'
+    )}`
+  )
+  console.log('# ========================\n')
+  const args = ['run', 'server']
+  return runCommand(data.autoMockInstall, args, {
+    cwd,
+  })
 }
 
 /**
