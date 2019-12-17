@@ -1,7 +1,7 @@
 <template>
   <div id="demo" v-if="CONFIG_ROLE.STANDARDLOGISTICSCOST">
     <div class="card">
-      <h2 class="mb10">例1</h2>
+      <h2 class="mb10">例1 \{{ count }}</h2>
       <Form ref="formQuery" :model="formQuery" :rules="ruleQuery" inline :label-width="90" v-if="CONFIG_ROLE.STANDARDLOGISTICSCOST_QUERY">
         <Row>
           <Col span="6">
@@ -225,6 +225,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import { CONFIG } from '../services/config'
 // import { fetch } from '../services/data.service'
 export default {
@@ -516,6 +517,14 @@ export default {
       }
     }
   },
+  computed: {
+    ...mapState({
+      count: state => {
+        console.log('change')
+        return state.count
+      }
+    })
+  },
   methods: {
     selectionChange (value) {
       this.checkedList = value
@@ -716,6 +725,8 @@ export default {
     }
   },
   created: function () {
+    this.$store.commit('add')
+    this.$store.dispatch('addAction')
     this.loadData()
   }
 }

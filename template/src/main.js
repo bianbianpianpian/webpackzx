@@ -16,6 +16,7 @@ import axios from 'axios'
 Vue.prototype.$http = axios
 import '../static/scss/style.scss'
 
+import store from './store'
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
@@ -24,6 +25,7 @@ new Vue({
   {{#router}}
   router,
   {{/router}}
+  store,
   {{#if_eq build "runtime"}}
   render: h => h(App)
   {{/if_eq}}
